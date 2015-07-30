@@ -342,6 +342,8 @@
 
 <script type="text/javascript">
 
+	var item = null;
+
   	
   	var isEmail = function (email) {
      	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -375,9 +377,11 @@
 			$.post( "http://104.236.251.213:3009/users", data)
 				
 				.done(function() {
-					window.location.href = "http://www.gostei.club/#/?email="+$("#email").val()+"&canal=landing";
+					window.location.href = "http://www.gostei.club/#/?email="+$("#email").val()+"&canal=ImagensParaFacebook&				utm_source=ImagensParaFacebook&utm_medium=PopUnder&utm_campaign=PU_ImagensParaFacebook
+";
 				})
-				
+
+
 				.fail(function() {
 					console.log("error");
 				});
