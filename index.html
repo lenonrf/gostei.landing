@@ -368,24 +368,71 @@
 
    		if(validateForm()){
 
+   			var sPageURL = window.location.search.substring(1);
+			var sURLVariables = sPageURL.split('&');
+			var canalUrl = '';
+
+			console.log('sPageURL', window.location.search.substring(1));
+
+			for (var i = 0; i < sURLVariables.length; i++){
+				
+				var sParameterName = sURLVariables[i].split('=');
+				
+				if (sParameterName[0] == 'utm_source'){
+					canalUrl = sParameterName[1];
+				}
+			}
+
+   			$('#checkoutButton').attr("disabled", true);
+
    			var data = {
    				name  : $("#lname").val(),
    				email : $("#email").val(),
-   				gender: $("#gender").val()
+   				gender: $("#gender").val(),
+   				canal: canalUrl
    			};
+
 			
-			$.post( "http://104.236.251.213:3009/users", data)
+			$.post( "http://127.0.0.1:3009/users", data)
 				
 				.done(function() {
-					window.location.href = "http://www.gostei.club/#/?email="+$("#email").val()+"&canal=ImagensParaFacebook&utm_source=ImagensParaFacebook&utm_medium=PopUnder&utm_campaign=PU_ImagensParaFacebook";
+					console.log('data', data);
+					console.log('getURLParameter', canalUrl);
+					redirectGostei();
 				})
 
 
-				.fail(function() {
-					console.log("error");
+				.fail(function(error) {
+					console.log("error", error);
+
+					if(error.status == 400){
+						redirectGostei();
+					}
 				});
+
  		}
-   	}
+   	};
+
+   	var redirectGostei = function(){
+
+   		var sPageURL = decodeURIComponent(window.location.search.substring(1));
+		//window.location.href = "http://www.gostei.club:8080/#/perguntas?email="+$("#email").val()+"&"+sPageURL;
+   	};
+
+	/*var getURLParameter = function(sParam){
+
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+
+		for (var i = 0; i < sURLVariables.length; i++){
+			
+			var sParameterName = sURLVariables[i].split('=');
+			
+			if (sParameterName[0] == 'utm_source'){
+				return sParameterName[1];
+			}
+		}
+	}​;*/
 
 
 
@@ -404,17 +451,17 @@
 
 
 
-  // Custom Popup
-  $(".term-popup").on("click", function () {
-  	
-    $(".terms").addClass("terms-active");
-    $(".overlay-dark").addClass("active");
-  });
+	  // Custom Popup
+	  $(".term-popup").on("click", function () {
+	  	
+	    $(".terms").addClass("terms-active");
+	    $(".overlay-dark").addClass("active");
+	  });
 
-  $(".overlay-dark").on("click", function () {
-    $(".terms").removeClass("terms-active");
-    $(".overlay-dark").removeClass("active");
-  });
+	  $(".overlay-dark").on("click", function () {
+	    $(".terms").removeClass("terms-active");
+	    $(".overlay-dark").removeClass("active");
+	  });
 
  
 
