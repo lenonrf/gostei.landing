@@ -416,30 +416,15 @@
    	var redirectGostei = function(){
 
    		var sPageURL = decodeURIComponent(window.location.search.substring(1));
-		//window.location.href = "http://www.gostei.club:8080/#/perguntas?email="+$("#email").val()+"&"+sPageURL;
+		window.location.href = "http://www.gostei.club:8080/#/perguntas?email="+$("#email").val()+"&"+sPageURL;
    	};
-
-	/*var getURLParameter = function(sParam){
-
-		var sPageURL = window.location.search.substring(1);
-		var sURLVariables = sPageURL.split('&');
-
-		for (var i = 0; i < sURLVariables.length; i++){
-			
-			var sParameterName = sURLVariables[i].split('=');
-			
-			if (sParameterName[0] == 'utm_source'){
-				return sParameterName[1];
-			}
-		}
-	}​;*/
 
 
 
  	$("#checkoutButton").on("click", function () {
 
 		if(!validateForm()){
-			$("#msgStatus").html("Preencha os campos !!!");
+			$("#msgStatus").html("Dados Incorretos !!!");
 			$("#msgStatus").css("background", "#FF0000");		
  		
  		}else{
